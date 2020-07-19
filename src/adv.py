@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+
 
 # Declare all the rooms
 
@@ -39,10 +41,14 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+myPlayer = Player("kevin", room["outside"])
+
 # Write a loop that:
+while(???):
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
+print(myPlayer)
 # * Waits for user input and decides what to do.
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
