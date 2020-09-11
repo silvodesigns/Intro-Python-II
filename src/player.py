@@ -9,3 +9,9 @@ class Player:
 
     def __str__(self):
         return f"{self.location.name}" + "\n" + f"{self.location.description}"
+    
+    def move(self, direction):
+        if self.location.connected_rooms[direction] is not None:
+            self.location = self.location.connected_rooms[direction]
+        else:
+            print("Sorry you have hit a wall, nothing in that direction...")

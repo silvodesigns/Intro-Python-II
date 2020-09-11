@@ -15,7 +15,14 @@ class Room:
         #attributes
         self.name = name
         self.description = description
+        self.connected_rooms = {
+            "n" : None,
+            "s" : None,
+            "w" : None,
+            "e" : None
+        }
        
+
 
 
    
