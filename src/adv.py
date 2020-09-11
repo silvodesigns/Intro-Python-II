@@ -41,7 +41,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-myPlayer = Player("kevin", room["outside"])
+myPlayer = Player("kevin",room["outside"])
 direction = ""
 # Write a loop that:
 while(direction != "quit"):
@@ -52,29 +52,29 @@ while(direction != "quit"):
 # * Waits for user input and decides what to do.
     print("N = go north, S = go south, E = go east, W = go west")
     direction = input("Where do you wanna go now?")
+  
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
     if(direction == "n" and myPlayer.location.name == "Outside Cave Entrance"):
         myPlayer.location = room["foyer"]
     elif(direction == "w" or direction == "e" or direction == "s"
-        and myPlayer.location.name == "Outside Cave Entrance" \
+        and myPlayer.location.name == "Outside Cave Entrance"
         ):
         print("Sorry you have hit a wall, nothing in that direction...")
-
     elif(myPlayer.location.name == "Foyer" and direction == "n"):
         myPlayer.location = room["overlook"]
     elif(myPlayer.location.name == "Foyer" and direction == "e"):
         myPlayer.location = room["narrow"]
-    elif(myPlayer.location.name == "Foyer" and direction == "w" ):
+    elif(myPlayer.location.name == "Foyer" and direction == "w"):
         print("Sorry you have hit a wall, nothing in that direction...")
     elif(myPlayer.location.name == "Foyer" and direction == "s"):
         myPlayer.location = room["outside"]
     
     elif(myPlayer.location.name == "Grand Overlook" and direction == "s"):
-        myPlayer.location.name = room["foyer"]
+        myPlayer.location = room["foyer"]
     elif(myPlayer.location.name == "Grand Overlook" and direction == "n" \
-        or direction == "e" or direction ==  "w"):
+        or direction == "e" or direction == "w"):
          print("Sorry you have hit a wall, nothing in that direction...")
 
     elif(myPlayer.location.name == "Narrow Passage" and direction == "n"):
