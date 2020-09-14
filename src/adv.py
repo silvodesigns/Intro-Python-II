@@ -1,5 +1,14 @@
 from room import Room
 from player import Player
+from items import Items
+
+
+#items
+
+sword = Items("Sword","A powerful and deadly sword")
+potion = Items("Potion", "Recovers a little bit of health")
+shield = Items("Shield", "Protects you from light hits")
+
 
 
 # Declare all the rooms
@@ -35,6 +44,12 @@ room['narrow'].connected_rooms["w"]= room['foyer']
 room['narrow'].connected_rooms["n"] = room['treasure']
 room['treasure'].connected_rooms["s"] = room['narrow']
 
+#add items
+
+room['outside'].add_item(sword)
+room['foyer'].add_item(potion)
+room['narrow'].add_item(shield)
+
 #
 # Main
 #
@@ -42,9 +57,9 @@ room['treasure'].connected_rooms["s"] = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 myPlayer = Player("kevin",room["outside"])
-direction = ""
+command = ""
 # Write a loop that:
-while(direction != "quit"):
+while(command != "quit"):
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
@@ -52,13 +67,40 @@ while(direction != "quit"):
     if myPlayer.location.name == "Treasure Chamber":
         break
 # * Waits for user input and decides what to do.
-    print("N = go north, S = go south, E = go east, W = go west")
-    direction = input("Where do you wanna go now?")
+    print("N = go north, S = go south, E = go east, W = go west\n")
+    print("Take items name or Drop items name")
+    command = input("Where do you wanna go now?")
   
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 
-    if direction == "n" or "s" or "e" or "w":
-        myPlayer.move(direction)
+    
+    if command in set("nesw"):
+        myPlayer.move(command)
+    if len(command) > 1:
+        info = command.split()
+        term = ""
+        if info[0].lower() == "take" or "get":
+            if myPlayer.location.search_item(info[1].lower()):
+                myPlayer.add_item(myPlayer.location.search_item(info[1].lower()))
+                print(f"The item {info[1]} has been added")
+                myPlayer.location.remove_item(info[1].lower())
+        else:
+            print("The item asking for not here")
+        
+        if info[0].lower() == "drop":
+            item = myPlayer.drop_item(info[1])
+            if item:
+                myPlayer.location.add_item(item)
+                print(f"Item {info[1]} has been added to the room")
+            else: 
+                print("Item u wanna drop u dont have")
+        
+           
+
+
+     
+
+   
 
 # If the user enters "q", quit the game.

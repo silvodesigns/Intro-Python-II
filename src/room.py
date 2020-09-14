@@ -21,6 +21,32 @@ class Room:
             "w" : None,
             "e" : None
         }
+        self.items = []
+
+    def __str__(self):
+     output = ""
+     output += "Items in these room:" + "\n"
+     for i in self.items:
+           output += "--" + i.name + "\n"
+     return output
+
+    def add_item(self, item):
+        self.items.append(item)
+    
+    def search_item(self, item_name):
+        for i in self.items:
+            if(i.name.lower() == item_name):
+                return i
+        return None
+    
+    def remove_item(self, item_name):
+        for i in range(len(self.items)):
+            if(self.items[i].name.lower() == item_name):
+                return self.items.pop(i)
+        return None
+
+
+
        
 
 
